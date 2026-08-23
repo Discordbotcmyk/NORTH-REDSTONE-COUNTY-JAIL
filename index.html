@@ -14,6 +14,7 @@
             --text-white: #ffffff;
             --text-gray: #a0a0a0;
             --border-color: #333333;
+            --discord-blurple: #5865F2;
         }
 
         * {
@@ -33,21 +34,28 @@
 
         /* Navigation */
         header {
-            background-color: rgba(18, 18, 18, 0.95);
+            background-color: rgba(18, 18, 18, 0.98);
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 2px solid var(--accent-orange);
-            backdrop-filter: blur(8px);
         }
 
         nav {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.5rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
         }
 
         .logo-container {
@@ -74,6 +82,7 @@
             list-style: none;
             gap: 1.5rem;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -90,19 +99,73 @@
         }
 
         .btn-play {
+            display: inline-block;
             background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
             color: #000 !important;
-            padding: 0.6rem 1.4rem;
+            padding: 0.7rem 1.6rem;
             border-radius: 6px;
             font-weight: 800 !important;
             text-transform: uppercase;
             box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
             transition: transform 0.2s, box-shadow 0.2s !important;
+            text-decoration: none;
         }
 
         .btn-play:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(255, 107, 0, 0.5);
+        }
+
+        /* Discord login / account area */
+        .account-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .btn-discord-login {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background-color: var(--discord-blurple);
+            color: #fff !important;
+            padding: 0.55rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 700 !important;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: filter 0.2s, transform 0.2s;
+        }
+
+        .btn-discord-login:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        .btn-discord-login svg {
+            width: 18px;
+            height: 18px;
+            fill: #fff;
+            flex-shrink: 0;
+        }
+
+        .welcome-text {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-white);
+        }
+
+        .welcome-text span {
+            color: var(--accent-yellow);
+        }
+
+        .btn-logout {
+            color: var(--text-gray) !important;
+            font-size: 0.8rem !important;
+            font-weight: 600 !important;
+            text-decoration: underline;
         }
 
         /* Content Sections */
@@ -141,13 +204,14 @@
             font-size: 3.5rem;
             font-weight: 900;
             line-height: 1.1;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
 
         .hero-title span {
             color: var(--accent-orange);
             background: linear-gradient(45deg, var(--accent-orange), var(--accent-yellow));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -316,6 +380,66 @@
             top: -2px;
         }
 
+        .log-note {
+            margin-top: 1rem;
+            background: rgba(255, 183, 0, 0.08);
+            border-left: 3px solid var(--accent-yellow);
+            padding: 0.7rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #e8d8b8;
+        }
+
+        .log-admin-controls {
+            margin-top: 1.2rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .log-admin-controls textarea {
+            width: 100%;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            min-height: 50px;
+            resize: vertical;
+        }
+
+        .log-admin-buttons {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .btn-small {
+            padding: 0.4rem 0.9rem;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .btn-small.save-note {
+            background: var(--accent-yellow);
+            color: #000;
+        }
+
+        .btn-small.delete-log {
+            background: #d90429;
+            color: #fff;
+        }
+
+        .btn-small:hover {
+            filter: brightness(1.1);
+        }
+
         /* Guidelines */
         .guidelines-section {
             margin-bottom: 2.5rem;
@@ -346,6 +470,19 @@
             color: var(--text-gray);
             font-size: 0.95rem;
             line-height: 1.4;
+        }
+
+        /* About NRC */
+        .about-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 8px;
+            padding: 2rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #d1d1d1;
+            max-width: 800px;
         }
 
         /* Credits Grid */
@@ -413,6 +550,132 @@
             border: 1px dashed var(--border-color);
         }
 
+        /* Admin Panel */
+        .admin-banner {
+            background: rgba(88, 101, 242, 0.12);
+            border: 1px solid var(--discord-blurple);
+            border-left: 5px solid var(--discord-blurple);
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+        }
+
+        .admin-panel-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .admin-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .admin-card h3 {
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+        }
+
+        .admin-card label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 0.3rem;
+            margin-top: 1rem;
+        }
+
+        .admin-card input[type="text"],
+        .admin-card input[type="date"],
+        .admin-card textarea {
+            width: 100%;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            padding: 0.6rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .admin-card textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: monospace;
+        }
+
+        .btn-admin {
+            margin-top: 1.2rem;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+            color: #000;
+            border: none;
+            padding: 0.7rem 1.4rem;
+            border-radius: 6px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .btn-admin.secondary {
+            background: var(--bg-dark);
+            color: var(--text-white);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-admin:hover {
+            filter: brightness(1.1);
+        }
+
+        .guideline-edit-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr auto;
+            gap: 0.6rem;
+            margin-bottom: 0.6rem;
+            align-items: start;
+        }
+
+        .guideline-edit-row input,
+        .guideline-edit-row textarea {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .guideline-edit-row textarea {
+            min-height: 44px;
+            resize: vertical;
+        }
+
+        .btn-remove-row {
+            background: #d90429;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .admin-status {
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .admin-status.success { color: #4ade80; }
+        .admin-status.error { color: #f87171; }
+
+        .subtle-note {
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
         /* Loading Overlay */
         .loading-overlay {
             display: none;
@@ -466,30 +729,41 @@
 
     <header>
         <nav>
-            <div class="logo-container" onclick="showSection('home')">
-                <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000005567914004/image.png?ex=6a8bff97&is=6a8aae17&hm=ac3e3936f56218ebb60a83c153b5c38b272e2d2903d328cb780dd745b64a0142&" alt="NRC Logo">
-                <span class="logo-text">NORTH REDSTONE</span>
+            <div class="nav-left">
+                <div class="logo-container" onclick="showSection('home')">
+                    <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000005567914004/image.png?ex=6a8bff97&is=6a8aae17&hm=ac3e3936f56218ebb60a83c153b5c38b272e2d2903d328cb780dd745b64a0142&" alt="NRC Logo">
+                    <span class="logo-text">NORTH REDSTONE</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="https://discord.gg/YM8KWZP6cM" target="_blank">Appeals</a></li>
+                    <li><a onclick="showSection('about')">About NRC</a></li>
+                    <li><a onclick="showApplicationsLoading()">Applications</a></li>
+                    <li><a onclick="showSection('changelogs')">Game Change Logs</a></li>
+                    <li><a href="https://discord.gg/jEeuvTu4Ae" target="_blank">Discord Server</a></li>
+                    <li><a onclick="showSection('guidelines')">Community Guidelines</a></li>
+                    <li><a onclick="showSection('credits')">Credits</a></li>
+                    <li id="adminNavLink" style="display:none;"><a onclick="showSection('adminpanel')">Administrator Panel</a></li>
+                </ul>
             </div>
-            <ul class="nav-links">
-                <li><a href="https://discord.gg/YM8KWZP6cM" target="_blank">Appeals</a></li>
-                <li><a onclick="showApplicationsLoading()">Applications</a></li>
-                <li><a onclick="showSection('changelogs')">Game Change Logs</a></li>
-                <li><a href="https://discord.gg/jEeuvTu4Ae" target="_blank">Discord Server</a></li>
-                <li><a onclick="showSection('guidelines')">Community Guidelines</a></li>
-                <li><a onclick="showSection('credits')">Credits</a></li>
-                <li><a href="https://www.roblox.com/games/106333511801260/North-Redstone-County-Jail" target="_blank" class="btn-play">Play Game</a></li>
-            </ul>
+            <div class="account-area" id="accountArea">
+                <!-- Filled in by JS: either a "Login with Discord" button, or the welcome message + logout -->
+                <a href="/auth/discord" class="btn-discord-login" id="discordLoginBtn">
+                    <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.973,0-52.845-26.587-52.845-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.845,59.239C470.716,310.993,447.538,337.58,417.871,337.58Z"/></svg>
+                    Login with Discord
+                </a>
+            </div>
         </nav>
     </header>
 
     <div class="container">
-        
+
         <!-- HOME PAGE -->
         <div id="home" class="page-section active">
             <div class="hero">
                 <div>
                     <h1 class="hero-title">NORTH REDSTONE <span>COUNTY JAIL</span></h1>
-                    <p class="hero-desc">Experience an immersive roleplay setting in North Redstone County Jail. Choose your path, follow the rules, and make your mark in our growing community.</p>
+                    <a href="https://www.roblox.com/games/106333511801260/North-Redstone-County-Jail" target="_blank" class="btn-play">Play Game</a>
+                    <p class="hero-desc" style="margin-top: 1.5rem;">Experience an immersive roleplay setting in North Redstone County Jail. Choose your path, follow the rules, and make your mark in our growing community.</p>
                     <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.5; border-left: 2px solid var(--accent-orange); padding-left: 1rem;">
                         bblego4 Is the founder of North Redstone Community in March 1st 2026. The community consisted of multiple individuals that assisted. Which the users can be seen in credits.
                     </p>
@@ -500,7 +774,7 @@
                 </div>
             </div>
 
-            <h2 style="margin-top: 3rem; color: var(--accent-orange);">Game Facilities & Areas</h2>
+            <h2 style="margin-top: 3rem; color: var(--accent-orange);">Game Areas</h2>
             <div class="feature-gallery">
                 <!-- Photo 2 (Cafeteria / Mess Hall) -->
                 <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000078758772866/0983c892-8066-42d0-908b-5193304f68ff.png?ex=6a8bffa9&is=6a8aae29&hm=09eafd94667f361b169c3b9370b296fecf0b676707d1dcade4f1755e1c6bf3c5&" alt="Jail Cafeteria">
@@ -508,6 +782,16 @@
                 <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000103689457764/2bcf861a-270d-4f98-a7f5-08f3b523735b.png?ex=6a8bffaf&is=6a8aae2f&hm=d5c87d325df7ad0f4f21079f93e5960ab89c94ea8c1f84507e5a194298ff51b5&" alt="Exterior Yard Path">
                 <!-- Photo 4 (Cell Block Upper Tier) -->
                 <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000131632046131/8cabc583-4ae9-433c-8732-197111c9b368.png?ex=6a8bffb5&is=6a8aae35&hm=ca54dab24e68d1bca239ae609921d8e9a671ab7e0192d9af2b78db5472e5ef94&" alt="Cell Block Walkway">
+            </div>
+        </div>
+
+        <!-- ABOUT NRC PAGE -->
+        <div id="about" class="page-section">
+            <h1 style="color: var(--text-white); margin-bottom: 1.5rem;">About NRC</h1>
+            <div class="about-card">
+                The North Redstone community was not a full thought idea on how the building would run. The game is a version 1 of County Jail Roleplay. County Jail Roleplay was removed from Roblox due to a false DMCA claim. North Redstone is not an exact copy — it is a reference to version one of the game.
+                <br><br>
+                Owner of the old CJRP (County Jail Roleplay) game: <strong style="color: var(--accent-yellow);">xTheBlockerx</strong>.
             </div>
         </div>
 
@@ -525,131 +809,14 @@
             <!-- Filter Controls -->
             <div class="filter-container">
                 <label for="sortOrder">Sort Order:</label>
-                <select id="sortOrder" onchange="filterLogs()">
+                <select id="sortOrder" onchange="renderChangelogs()">
                     <option value="newest">Most Recent to Oldest</option>
                     <option value="oldest">Oldest to Most Recent</option>
                 </select>
             </div>
 
             <div id="logsWrapper">
-                <!-- Log 1.2.4 -->
-                <div class="log-card" data-date="2026-08-19">
-                    <div class="log-title-row">
-                        <span class="log-title">1.2.4 UPDATE</span>
-                        <span class="log-date">8/19/2026</span>
-                    </div>
-                    <div class="log-content">
-                        <ul>
-                            <li>Added New Handcuff System</li>
-                            <li>Added New Hud - Money System</li>
-                            <li>Added New Admin System - Staff Only</li>
-                            <li>Added New Escape Path by Medium</li>
-                            <li>Added Data Saving</li>
-                            <li>Revamped Main Menu</li>
-                            <li>Revamped Workshop</li>
-                            <li>Removed All Supermax Script and Working Assets</li>
-                            <li>Fixed Taser Flying Glitch</li>
-                            <li>Fixed Max Doors Having No Collision</li>
-                            <li>Fixed Medium Seats</li>
-                            <li>Fixed Cafe Doors Not Opening</li>
-                            <li>Fix Broken Seats</li>
-                            <li>And many more!</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Log 1.2.3 -->
-                <div class="log-card" data-date="2026-08-10">
-                    <div class="log-title-row">
-                        <span class="log-title">1.2.3 UPDATE</span>
-                        <span class="log-date">8/10/2026</span>
-                    </div>
-                    <div class="log-content">
-                        <ul>
-                            <li>Moved Maximum Security.</li>
-                            <li>Moved Minimum Security.</li>
-                            <li>Added Medium Security.</li>
-                            <li>Changed Booking to refresh player.</li>
-                            <li>Added new CERT.</li>
-                            <li>Added new Riot Control.</li>
-                            <li>Added new upstairs.</li>
-                            <li>Added doors on shower block.</li>
-                            <li>Added new anti cheat.</li>
-                            <li>Fixed all Animations for firearms.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Log 1.2.2 -->
-                <div class="log-card" data-date="2026-08-02">
-                    <div class="log-title-row">
-                        <span class="log-title">1.2.2 UPDATE</span>
-                        <span class="log-date">8/02/2026</span>
-                    </div>
-                    <div class="log-content">
-                        <ul>
-                            <li>Added fall map early.</li>
-                            <li>Added new team list</li>
-                            <li>Added door on the shower block.</li>
-                            <li>Added hold down animation for all guns.</li>
-                            <li>Fixed Handcuff breaking [Again].</li>
-                            <li>Fixed floating lights.</li>
-                            <li>Fixed Overscale Roofs clipping.</li>
-                            <li>Fixed Door closing at the wrong schedule.</li>
-                            <li>Fixed Admin System - Staff Only</li>
-                            <li>Fixed broken Glock animation.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Log 1.2.1 -->
-                <div class="log-card" data-date="2026-07-31-2">
-                    <div class="log-title-row">
-                        <span class="log-title">1.2.1 UPDATE</span>
-                        <span class="log-date">7/31/2026</span>
-                    </div>
-                    <div class="log-content">
-                        <ul>
-                            <li>Sheriff Office can now teleport to the prison.</li>
-                            <li>Added a Construction Area by Maximum Security.</li>
-                            <li>Dropped Items now require a prompt to pickup.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- CHANGE LOGS & BUG FIXES -->
-                <div class="log-card" data-date="2026-07-31-1">
-                    <div class="log-title-row">
-                        <span class="log-title">CHANGE LOGS & BUG FIXES</span>
-                        <span class="log-date">7/31/2026</span>
-                    </div>
-                    <div class="log-content">
-                        <ul>
-                            <li>Fixed handcuffs not cuffing.</li>
-                            <li>Fixed movement and Cuffing.</li>
-                            <li>Fixed all team barriers. All Inmate, Escapee and sheriff's office can now pass.</li>
-                            <li>Removed from players joining on phone/tablet. Not Ready.</li>
-                            <li>Improved window escape. Faster Escape.</li>
-                            <li>Fixed broken/unanchored parts.</li>
-                            <li>Removed Super Maximum Security. Not up to our standards.</li>
-                            <li>Fixed Visible Prompt Parts. Now Invisible.</li>
-                            <li>Fixed Firearm Sounds. No more hearing gunshots, slide backs on other side of the map.</li>
-                            <li>Improved Alarm. Inmates can't use alarm anymore.</li>
-                            <li>Removed Super Maximum Security From booking.</li>
-                            <li>Removed Super Maximum Security Team.</li>
-                            <li>Fixed Booking System.</li>
-                            <li>Removed Broken Firearms.</li>
-                            <li>Removed Old Basement.</li>
-                            <li>Removed Old Surveillance Room.</li>
-                            <li>Fixed Clipping Avatars.</li>
-                            <li>Banned Abusing Emotes.</li>
-                            <li>Removed Super Maximum Security Spawns.</li>
-                            <li>Banned Non game Gear.</li>
-                            <li>Added Anti Cheat.</li>
-                            <li>Removed Solitary Confinement Team</li>
-                        </ul>
-                    </div>
-                </div>
+                <p class="subtle-note">Loading change logs...</p>
             </div>
 
             <!-- Footer Message Notice -->
@@ -661,7 +828,7 @@
 
         <!-- COMMUNITY GUIDELINES PAGE -->
         <div id="guidelines" class="page-section">
-            
+
             <!-- DMCA Header Banner -->
             <div class="dmca-box">
                 <!-- DMCA Badge Image -->
@@ -673,42 +840,16 @@
 
             <div class="guidelines-section">
                 <h2>North Redstone Community Game Guidelines</h2>
-                
-                <div class="rule-card"><p><strong>1. Unfair Gameplay.</strong> Any form of unfair gameplay will not be tolerated within the game North Redstone County Jail. Violating this role result in a moderation action</p></div>
-                <div class="rule-card"><p><strong>2. Glitching.</strong> Any form of glitching is strictly prohibited even for good glitching. If a player is caught glitching. or abusing a glitch they could be moderated.</p></div>
-                <div class="rule-card"><p><strong>3. Bug Abuse</strong> Any form of bug abuse will result in immediate. 3-day ban or further moderation action depending on the severity. bug of use is strictly prohibited even to cause chaos.</p></div>
-                <div class="rule-card"><p><strong>4. Respawning to avoid arrest/cuffs</strong> Responding to avoid arrest/cuffs is strictly prohibited at any point of time violating this rule could result in moderation action.</p></div>
-                <div class="rule-card"><p><strong>5. Cheating/Exploits</strong> Anytime playing North Redstone Community. You are not to use exploits/cheats. to gain an unfair advantage as this is strictly prohibited and will result in an immediate permanent ban until appeal.</p></div>
-                <div class="rule-card"><p><strong>6. Chat Spamming/Flooding Radio.</strong> Any form of chat spamming or flooding chats this includes radio or any form of communication will result in a moderation action.</p></div>
-                <div class="rule-card"><p><strong>7. Abuse of Vote Kick.</strong> Any form of abusing vote kick will result in a moderation action. As abusing vote kick is a tool to get rid of rule breakers not abuse it.</p></div>
-                <div class="rule-card"><p><strong>8. Scamming.</strong> Any form of scamming? players of North Redstone County Jail will result in an immediate permanent ban from our game as scamming violates Roblox terms of service and NRC TOS.</p></div>
-                <div class="rule-card"><p><strong>9. Leaving to avoid moderation action.</strong> At any time if a moderator has a problem with you and trying to resolve it. You are not to leave during a moderation team as that will be signs of evading moderation. Any form of that will result in a permanent ban until appeal has been approved.</p></div>
-                <div class="rule-card"><p><strong>10. Duping.</strong> At any time North Redstone County Jail prohibits the use of duping guns. Shivs, Keycards, Etc. anyone that is caught duping will result in a moderation action.</p></div>
-                <div class="rule-card"><p><strong>11. Roblox TOS.</strong> Please follow Roblox terms of service at all times. If caught breaking Rolex POS, you will be banned. from North Redstone County Jail and your account will be reported to Roblox.</p></div>
-                <div class="rule-card"><p><strong>12. North Redstone TOS [Terms of Service]</strong> anytime you're not to violate the terms of service of North Redstone Community or North Redstone County Jail if caught You will face moderation action.</p></div>
-                <div class="rule-card"><p><strong>13. Staff Impersonation.</strong> At any time you were not to impersonate moderators developer or ownership members if caught impersonating you will be banned. Or other moderation may be taken.</p></div>
-                <div class="rule-card"><p><strong>14. Usage of map steelers</strong> At any time you were not to use a map sealer to take the map of North Redstone County Jail as if caught stealing our map you will be banned permanently and a DMCA will be filed.</p></div>
+                <div id="gameGuidelinesWrapper">
+                    <p class="subtle-note">Loading guidelines...</p>
+                </div>
             </div>
 
             <div class="guidelines-section">
                 <h2>North Redstone Community Discord Guidelines</h2>
-
-                <div class="rule-card"><p><strong>1. Respect.</strong> At any time should you respect any members of the North Redstone Community , failure to abide by this rule may result in a moderation.</p></div>
-                <div class="rule-card"><p><strong>2. Spamming.</strong> At any time You are not to spam in any channels within North Redstone Community. This includes primary off topic. commands in-game pictures failing to abide by this rule may result in moderation.</p></div>
-                <div class="rule-card"><p><strong>3. Usage of Racial Slurs.</strong> At any point in time you are prohibited from using. racial slurs regardless of race as this is a form of harassment. It will not be tolerated within the community. They failure to abide by this rule. may result in moderation action.</p></div>
-                <div class="rule-card"><p><strong>4. Harassment.</strong> At any point of time you are not to harass other members about their appearance speech impediments or other disabilities. This is strictly prohibited and will result in a moderation.</p></div>
-                <div class="rule-card"><p><strong>5. NSFW.</strong> At any point of time you are not to post. 18+ material content otherwise known as NSFW this is strictly prohibited. And if caught doing it. You will be immediately banned from the community without the chance of appeal.</p></div>
-                <div class="rule-card"><p><strong>6. Alt Accounts/Bypassing Moderation Actions.</strong> At any point of time you were not to use alt accounts to bypass moderation action. The only time you may use an ALT account is if your account was compromised. deleted otherwise, alt accounts are extremely prohibited And could lead to moderation action if found trying to bypass moderation actions.</p></div>
-                <div class="rule-card"><p><strong>7. Ear Rape/Obnoxious sounds.</strong> At any point in time you were not to ear rape any member. inside of a voice call as this is strictly prohibited and a moderator may server mute you with further moderation actions.</p></div>
-                <div class="rule-card"><p><strong>8. Pinging NRC Officials.</strong> At any point in time you are not to Ping North Redstone Community officials at any time the only time you make a official is if there is a rule breaker. And you need an immediate response? otherwise pinging moderators developers or even ownership will result in you possibly being banned softban/kick or muted.</p></div>
-                <div class="rule-card"><p><strong>9. Spam Joining Voice Calls.</strong> At any time, you're not to spam join voice calls over and over again. If caught you may receive a mute or further moderation action.</p></div>
-                <div class="rule-card"><p><strong>10. Wasting Moderation Time.</strong> At any time you are not to waste our moderators time for non-moderation needs are moderators are here to strictly help and protect the community. From rule Breakers if caught abusing our systems you will be banned from the community. And possibly without the chance of appeal.</p></div>
-                <div class="rule-card"><p><strong>11. Self Harm.</strong> At any time self harm is strictly prohibited and will not be tolerated. as we want to make sure the safety of our members and if caught moderation action will happen and the authorities will be contacted.</p></div>
-                <div class="rule-card"><p><strong>12. Discord TOS [Terms Of Service]</strong> Breaking Discord TOS is prohibited within North Redstone Community and will lead to a permanent ban with [NO APPEAL] any account that violate Discord Terms of Service will be reported.</p></div>
-                <div class="rule-card"><p><strong>13. North Redstone TOS [Terms of Service]</strong> Anytime you're not to violate the terms of service of North Redstone Community if caught You will face moderation action.</p></div>
-                <div class="rule-card"><p><strong>14. Encouraging members to break rules.</strong> At any point in time you are not to encourage other members to break rules upon your behalf if caught. You will face moderation action worse than other member.</p></div>
-                <div class="rule-card"><p><strong>15. Attempt to Raid.</strong> Any form of attempting to raid North Redstone Community will result in a permanent Blacklist from our community and Discord turns the service will be notified of your actions.</p></div>
-                <div class="rule-card"><p><strong>16. Staff Impersonation.</strong> At any time you were not to impersonate moderators developer or ownership members if caught impersonating you will be banned. Or other moderation may be taken.</p></div>
+                <div id="discordGuidelinesWrapper">
+                    <p class="subtle-note">Loading guidelines...</p>
+                </div>
             </div>
         </div>
 
@@ -774,6 +915,54 @@
             </div>
         </div>
 
+        <!-- ADMINISTRATOR PANEL (hidden unless logged-in admin — real enforcement happens server-side) -->
+        <div id="adminpanel" class="page-section">
+            <h1 style="color: var(--text-white); margin-bottom: 1rem;">Administrator Panel</h1>
+            <div class="admin-banner">
+                Changes made here are saved immediately and go live on the public site.
+            </div>
+
+            <div class="admin-panel-grid">
+
+                <!-- Add Change Log -->
+                <div class="admin-card">
+                    <h3>Add Game Change Log</h3>
+                    <label for="clTitle">Title</label>
+                    <input type="text" id="clTitle" placeholder="e.g. 1.2.5 UPDATE">
+
+                    <label for="clDate">Date</label>
+                    <input type="date" id="clDate">
+
+                    <label for="clBullets">Bullet points (one per line)</label>
+                    <textarea id="clBullets" placeholder="Added new feature&#10;Fixed a bug&#10;..."></textarea>
+
+                    <label for="clNote">Note (optional, shown on the public change log)</label>
+                    <textarea id="clNote" placeholder="e.g. This update will require a full re-download of the game files."></textarea>
+
+                    <button class="btn-admin" onclick="submitChangelog()">Post Change Log</button>
+                    <div id="clStatus" class="admin-status"></div>
+                </div>
+
+                <!-- Edit Community Guidelines -->
+                <div class="admin-card">
+                    <h3>Community Guidelines Editor</h3>
+                    <p class="subtle-note">Edit, add, or remove rules below, then save each section.</p>
+
+                    <h4 style="margin-top: 1.2rem; color: var(--accent-yellow);">Game Guidelines</h4>
+                    <div id="gameGuidelinesEditor"></div>
+                    <button class="btn-admin secondary" onclick="addGuidelineRow('game')">+ Add Rule</button>
+                    <button class="btn-admin" onclick="saveGuidelines('game')">Save Game Guidelines</button>
+                    <div id="gameGuidelinesStatus" class="admin-status"></div>
+
+                    <h4 style="margin-top: 2rem; color: var(--accent-yellow);">Discord Guidelines</h4>
+                    <div id="discordGuidelinesEditor"></div>
+                    <button class="btn-admin secondary" onclick="addGuidelineRow('discord')">+ Add Rule</button>
+                    <button class="btn-admin" onclick="saveGuidelines('discord')">Save Discord Guidelines</button>
+                    <div id="discordGuidelinesStatus" class="admin-status"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- APPLICATION LOADING OVERLAY -->
@@ -787,6 +976,7 @@
     </footer>
 
     <script>
+
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.page-section');
             sections.forEach(section => section.classList.remove('active'));
@@ -802,24 +992,293 @@
             }, 3000);
         }
 
-        function filterLogs() {
-            const sortOrder = document.getElementById('sortOrder').value;
-            const container = document.getElementById('logsWrapper');
-            const logs = Array.from(container.children);
-
-            logs.sort((a, b) => {
-                const dateA = a.getAttribute('data-date');
-                const dateB = b.getAttribute('data-date');
-                
-                if (sortOrder === 'newest') {
-                    return dateB.localeCompare(dateA);
-                } else {
-                    return dateA.localeCompare(dateB);
-                }
-            });
-
-            logs.forEach(log => container.appendChild(log));
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str == null ? '' : String(str);
+            return div.innerHTML;
         }
+
+
+        let currentSession = { loggedIn: false, isAdmin: false, username: null };
+
+        async function loadSession() {
+            try {
+                const res = await fetch('/api/session');
+                currentSession = await res.json();
+            } catch (e) {
+                currentSession = { loggedIn: false, isAdmin: false, username: null };
+            }
+
+            const accountArea = document.getElementById('accountArea');
+            const adminNavLink = document.getElementById('adminNavLink');
+
+            if (currentSession.loggedIn) {
+                accountArea.innerHTML = `
+                    <span class="welcome-text">Welcome to North Redstone, <span>${escapeHtml(currentSession.username)}</span></span>
+                    <a class="btn-logout" onclick="logout()">Logout</a>
+                `;
+                adminNavLink.style.display = currentSession.isAdmin ? 'block' : 'none';
+            } else {
+                accountArea.innerHTML = `
+                    <a href="/auth/discord" class="btn-discord-login">
+                        <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.973,0-52.845-26.587-52.845-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.845,59.239C470.716,310.993,447.538,337.58,417.871,337.58Z"/></svg>
+                        Login with Discord
+                    </a>`;
+                adminNavLink.style.display = 'none';
+            }
+        }
+
+        async function logout() {
+            await fetch('/auth/logout', { method: 'POST' });
+            await loadSession();
+            showSection('home');
+        }
+
+        // Wraps admin-only fetch calls. If the server says 403, the session
+        // most likely expired (e.g. the server restarted since you logged in
+        // and lost its in-memory session), even though the page still shows
+        // you as logged in. This re-checks and gives a clear message instead
+        // of a confusing "Admin access required" with no explanation.
+        async function adminFetch(url, options) {
+            const res = await fetch(url, options);
+            if (res.status === 403) {
+                await loadSession();
+                if (!currentSession.isAdmin) {
+                    throw new Error('Your admin session expired (often caused by the server restarting). Please log out and log back in with Discord, then try again.');
+                }
+            }
+            if (!res.ok) {
+                let message = 'Something went wrong.';
+                try { message = (await res.json()).error || message; } catch (e) { /* ignore */ }
+                throw new Error(message);
+            }
+            return res.json();
+        }
+
+        let changelogsCache = [];
+
+        async function loadChangelogs() {
+            try {
+                const res = await fetch('/api/changelogs');
+                changelogsCache = await res.json();
+            } catch (e) {
+                changelogsCache = [];
+            }
+            renderChangelogs();
+        }
+
+        function renderChangelogs() {
+            const sortOrder = document.getElementById('sortOrder').value;
+            const sorted = [...changelogsCache].sort((a, b) =>
+                sortOrder === 'newest' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date)
+            );
+
+            const wrapper = document.getElementById('logsWrapper');
+            if (sorted.length === 0) {
+                wrapper.innerHTML = '<p class="subtle-note">No change logs yet.</p>';
+                return;
+            }
+
+            wrapper.innerHTML = sorted.map(log => `
+                <div class="log-card">
+                    <div class="log-title-row">
+                        <span class="log-title">${escapeHtml(log.title)}</span>
+                        <span class="log-date">${escapeHtml(formatDate(log.date))}</span>
+                    </div>
+                    <div class="log-content">
+                        <ul>
+                            ${log.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ${log.note ? `<div class="log-note"><strong>Note:</strong> ${escapeHtml(log.note)}</div>` : ''}
+                    ${currentSession.isAdmin ? `
+                        <div class="log-admin-controls">
+                            <textarea id="note-${log.id}" placeholder="Add or edit a note for this update...">${escapeHtml(log.note || '')}</textarea>
+                            <div class="log-admin-buttons">
+                                <button class="btn-small save-note" onclick="saveChangelogNote('${log.id}')">Save Note</button>
+                                <button class="btn-small delete-log" onclick="deleteChangelog('${log.id}')">Delete Change Log</button>
+                            </div>
+                            <div id="logStatus-${log.id}" class="admin-status"></div>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function formatDate(isoDate) {
+            const parts = isoDate.split('-');
+            if (parts.length !== 3) return isoDate;
+            const [y, m, d] = parts;
+            return `${parseInt(m)}/${parseInt(d)}/${y}`;
+        }
+
+        let guidelinesCache = { game: [], discord: [] };
+
+        async function loadGuidelines() {
+            try {
+                const res = await fetch('/api/guidelines');
+                guidelinesCache = await res.json();
+            } catch (e) {
+                guidelinesCache = { game: [], discord: [] };
+            }
+            renderGuidelinesPublic('game', 'gameGuidelinesWrapper');
+            renderGuidelinesPublic('discord', 'discordGuidelinesWrapper');
+            renderGuidelinesEditor('game');
+            renderGuidelinesEditor('discord');
+        }
+
+        function renderGuidelinesPublic(category, wrapperId) {
+            const wrapper = document.getElementById(wrapperId);
+            const rules = guidelinesCache[category] || [];
+            if (rules.length === 0) {
+                wrapper.innerHTML = '<p class="subtle-note">No guidelines have been posted yet.</p>';
+                return;
+            }
+            wrapper.innerHTML = rules.map((r, i) => `
+                <div class="rule-card">
+                    <p><strong>${i + 1}. ${escapeHtml(r.title)}</strong> ${escapeHtml(r.description)}</p>
+                </div>
+            `).join('');
+        }
+
+        async function submitChangelog() {
+            const title = document.getElementById('clTitle').value.trim();
+            const date = document.getElementById('clDate').value;
+            const bullets = document.getElementById('clBullets').value
+                .split('\n')
+                .map(b => b.trim())
+                .filter(Boolean);
+            const note = document.getElementById('clNote').value.trim();
+            const statusEl = document.getElementById('clStatus');
+
+            if (!title || !date || bullets.length === 0) {
+                statusEl.textContent = 'Please fill in a title, date, and at least one bullet point.';
+                statusEl.className = 'admin-status error';
+                return;
+            }
+
+            try {
+                changelogsCache = await adminFetch('/api/changelogs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, date, bullets, note }),
+                });
+                renderChangelogs();
+                statusEl.textContent = 'Change log posted!';
+                statusEl.className = 'admin-status success';
+                document.getElementById('clTitle').value = '';
+                document.getElementById('clBullets').value = '';
+                document.getElementById('clNote').value = '';
+            } catch (e) {
+                statusEl.textContent = e.message;
+                statusEl.className = 'admin-status error';
+            }
+        }
+
+        async function saveChangelogNote(id) {
+            const statusEl = document.getElementById(`logStatus-${id}`);
+            const note = document.getElementById(`note-${id}`).value.trim();
+            try {
+                changelogsCache = await adminFetch(`/api/changelogs/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ note }),
+                });
+                renderChangelogs();
+            } catch (e) {
+                if (statusEl) {
+                    statusEl.textContent = e.message;
+                    statusEl.className = 'admin-status error';
+                } else {
+                    alert(e.message);
+                }
+            }
+        }
+
+        async function deleteChangelog(id) {
+            if (!confirm('Delete this change log entry? This cannot be undone.')) return;
+            try {
+                changelogsCache = await adminFetch(`/api/changelogs/${id}`, { method: 'DELETE' });
+                renderChangelogs();
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+
+        let guidelinesDraft = { game: [], discord: [] };
+
+        function renderGuidelinesEditor(category) {
+            guidelinesDraft[category] = (guidelinesCache[category] || []).map(r => ({ ...r }));
+            drawGuidelineRows(category);
+        }
+
+        function drawGuidelineRows(category) {
+            const editorId = category === 'game' ? 'gameGuidelinesEditor' : 'discordGuidelinesEditor';
+            const editor = document.getElementById(editorId);
+            const rows = guidelinesDraft[category];
+
+            editor.innerHTML = rows.map((r, i) => `
+                <div class="guideline-edit-row">
+                    <input type="text" value="${escapeHtml(r.title)}" placeholder="Rule title"
+                        oninput="updateGuidelineField('${category}', ${i}, 'title', this.value)">
+                    <textarea placeholder="Rule description"
+                        oninput="updateGuidelineField('${category}', ${i}, 'description', this.value)">${escapeHtml(r.description)}</textarea>
+                    <button class="btn-remove-row" onclick="removeGuidelineRow('${category}', ${i})">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function updateGuidelineField(category, index, field, value) {
+            guidelinesDraft[category][index][field] = value;
+        }
+
+        function addGuidelineRow(category) {
+            guidelinesDraft[category].push({ title: '', description: '' });
+            drawGuidelineRows(category);
+        }
+
+        function removeGuidelineRow(category, index) {
+            guidelinesDraft[category].splice(index, 1);
+            drawGuidelineRows(category);
+        }
+
+        async function saveGuidelines(category) {
+            const statusId = category === 'game' ? 'gameGuidelinesStatus' : 'discordGuidelinesStatus';
+            const statusEl = document.getElementById(statusId);
+
+            const cleanedRows = guidelinesDraft[category].filter(r => r.title.trim());
+            const payload = {
+                game: category === 'game' ? cleanedRows : guidelinesCache.game,
+                discord: category === 'discord' ? cleanedRows : guidelinesCache.discord,
+            };
+
+            try {
+                guidelinesCache = await adminFetch('/api/guidelines', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                renderGuidelinesPublic('game', 'gameGuidelinesWrapper');
+                renderGuidelinesPublic('discord', 'discordGuidelinesWrapper');
+                renderGuidelinesEditor(category);
+                statusEl.textContent = 'Saved!';
+                statusEl.className = 'admin-status success';
+            } catch (e) {
+                statusEl.textContent = e.message;
+                statusEl.className = 'admin-status error';
+            }
+        }
+
+        (async function init() {
+            const params = new URLSearchParams(window.location.search);
+            await loadSession();
+            await loadChangelogs();
+            await loadGuidelines();
+
+            if (params.get('login') === 'failed') {
+                alert('Discord login failed. Please try again.');
+            }
+        })();
     </script>
 </body>
 </html>
