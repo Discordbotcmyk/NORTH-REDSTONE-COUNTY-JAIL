@@ -1,0 +1,22 @@
+{
+  "name": "functions",
+  "description": "North Redstone Community backend API",
+  "engines": {
+    "node": "20"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "serve": "firebase emulators:start --only functions,firestore,hosting",
+    "deploy": "firebase deploy --only functions,hosting,firestore:rules"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.3",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^4.9.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "private": true
+}
