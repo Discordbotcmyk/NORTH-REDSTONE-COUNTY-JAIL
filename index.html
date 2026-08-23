@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>North Redstone Community</title>
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --bg-card-hover: #282828;
+            --accent-orange: #ff6b00;
+            --accent-yellow: #ffb700;
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent-orange);
+            backdrop-filter: blur(8px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo-container img {
+            height: 45px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-white);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-yellow);
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+            color: #000 !important;
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            font-weight: 800 !important;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s !important;
+        }
+
+        .btn-play:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.5);
+        }
+
+        /* Content Sections */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span {
+            color: var(--accent-orange);
+            background: linear-gradient(45deg, var(--accent-orange), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .hero-banner {
+            width: 100%;
+            border-radius: 12px;
+            border: 2px solid var(--accent-orange);
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.2);
+            object-fit: cover;
+            max-height: 380px;
+        }
+
+        /* Image Gallery Grids */
+        .feature-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-gallery img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .feature-gallery img:hover {
+            transform: scale(1.03);
+            border-color: var(--accent-yellow);
+        }
+
+        /* Notice Boxes */
+        .notice-box {
+            background-color: var(--bg-card);
+            border-left: 4px solid var(--accent-yellow);
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .notice-icon {
+            font-size: 1.5rem;
+            color: var(--accent-yellow);
+        }
+
+        .dmca-box {
+            background-color: rgba(217, 4, 41, 0.15);
+            border: 1px solid #d90429;
+            border-left: 6px solid #d90429;
+            padding: 1.2rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dmca-box img {
+            height: 50px;
+            width: auto;
+        }
+
+        .dmca-text {
+            color: #ff8fa3;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Filter Controls */
+        .filter-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .filter-container select {
+            background: var(--bg-dark);
+            color: var(--text-white);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        /* Change Logs */
+        .changelog-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .changelog-header img {
+            height: 70px;
+        }
+
+        .log-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .log-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .log-title {
+            color: var(--accent-orange);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .log-date {
+            color: var(--accent-yellow);
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: rgba(255, 183, 0, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .log-content ul {
+            list-style: none;
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .log-content li {
+            position: relative;
+            padding-left: 1.5rem;
+            color: #d1d1d1;
+        }
+
+        .log-content li::before {
+            content: "•";
+            color: var(--accent-orange);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* Guidelines */
+        .guidelines-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .guidelines-section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            color: var(--accent-orange);
+            border-bottom: 2px solid var(--accent-orange);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .rule-card {
+            background-color: var(--bg-card);
+            padding: 1rem 1.2rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            border-left: 3px solid var(--border-color);
+        }
+
+        .rule-card:hover {
+            border-left-color: var(--accent-yellow);
+        }
+
+        .rule-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Credits Grid */
+        .credits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .credit-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .credit-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-orange);
+        }
+
+        .avatar-frame {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-yellow);
+            margin: 0 auto 1rem;
+            overflow: hidden;
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .person-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .person-role {
+            color: var(--accent-orange);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.2rem 0;
+        }
+
+        .person-username {
+            color: var(--text-gray);
+            font-size: 0.8rem;
+        }
+
+        .credits-note {
+            margin-top: 3rem;
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            color: var(--text-gray);
+            font-style: italic;
+            border: 1px dashed var(--border-color);
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 18, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--border-color);
+            border-top: 5px solid var(--accent-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-white);
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo-container" onclick="showSection('home')">
+                <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000005567914004/image.png?ex=6a8bff97&is=6a8aae17&hm=ac3e3936f56218ebb60a83c153b5c38b272e2d2903d328cb780dd745b64a0142&" alt="NRC Logo">
+                <span class="logo-text">NORTH REDSTONE</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="https://discord.gg/YM8KWZP6cM" target="_blank">Appeals</a></li>
+                <li><a onclick="showApplicationsLoading()">Applications</a></li>
+                <li><a onclick="showSection('changelogs')">Game Change Logs</a></li>
+                <li><a href="https://discord.gg/jEeuvTu4Ae" target="_blank">Discord Server</a></li>
+                <li><a onclick="showSection('guidelines')">Community Guidelines</a></li>
+                <li><a onclick="showSection('credits')">Credits</a></li>
+                <li><a href="https://www.roblox.com/games/106333511801260/North-Redstone-County-Jail" target="_blank" class="btn-play">Play Game</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <!-- HOME PAGE -->
+        <div id="home" class="page-section active">
+            <div class="hero">
+                <div>
+                    <h1 class="hero-title">NORTH REDSTONE <span>COUNTY JAIL</span></h1>
+                    <p class="hero-desc">Experience an immersive roleplay setting in North Redstone County Jail. Choose your path, follow the rules, and make your mark in our growing community.</p>
+                    <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.5; border-left: 2px solid var(--accent-orange); padding-left: 1rem;">
+                        bblego4 Is the founder of North Redstone Community in March 1st 2026. The community consisted of multiple individuals that assisted. Which the users can be seen in credits.
+                    </p>
+                </div>
+                <div>
+                    <!-- Photo 4 (Facility / Cell Block Overview) -->
+                    <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000161457864804/72cc780d-1f7d-4e93-9f50-6db8f267dbbc.png?ex=6a8bffbc&is=6a8aae3c&hm=e12eee4f81c0fcd5296cc27a64c92f424d49dfe7937e3e987ce674478b8829a5&" class="hero-banner" alt="Cell Block Overview">
+                </div>
+            </div>
+
+            <h2 style="margin-top: 3rem; color: var(--accent-orange);">Game Facilities & Areas</h2>
+            <div class="feature-gallery">
+                <!-- Photo 2 (Cafeteria / Mess Hall) -->
+                <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000078758772866/0983c892-8066-42d0-908b-5193304f68ff.png?ex=6a8bffa9&is=6a8aae29&hm=09eafd94667f361b169c3b9370b296fecf0b676707d1dcade4f1755e1c6bf3c5&" alt="Jail Cafeteria">
+                <!-- Photo 3 (Outdoors / Mine & Gate Area) -->
+                <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000103689457764/2bcf861a-270d-4f98-a7f5-08f3b523735b.png?ex=6a8bffaf&is=6a8aae2f&hm=d5c87d325df7ad0f4f21079f93e5960ab89c94ea8c1f84507e5a194298ff51b5&" alt="Exterior Yard Path">
+                <!-- Photo 4 (Cell Block Upper Tier) -->
+                <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000131632046131/8cabc583-4ae9-433c-8732-197111c9b368.png?ex=6a8bffb5&is=6a8aae35&hm=ca54dab24e68d1bca239ae609921d8e9a671ab7e0192d9af2b78db5472e5ef94&" alt="Cell Block Walkway">
+            </div>
+        </div>
+
+        <!-- GAME CHANGE LOGS PAGE -->
+        <div id="changelogs" class="page-section">
+            <div class="changelog-header">
+                <!-- Photo 5: Official Community Logo -->
+                <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1541000005567914004/image.png?ex=6a8bff97&is=6a8aae17&hm=ac3e3936f56218ebb60a83c153b5c38b272e2d2903d328cb780dd745b64a0142&" alt="NRC Shield Logo">
+                <div>
+                    <h1 style="color: var(--text-white);">Game Change Logs</h1>
+                    <p style="color: var(--text-gray);">Stay updated with the latest updates and bug fixes.</p>
+                </div>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="filter-container">
+                <label for="sortOrder">Sort Order:</label>
+                <select id="sortOrder" onchange="filterLogs()">
+                    <option value="newest">Most Recent to Oldest</option>
+                    <option value="oldest">Oldest to Most Recent</option>
+                </select>
+            </div>
+
+            <div id="logsWrapper">
+                <!-- Log 1.2.4 -->
+                <div class="log-card" data-date="2026-08-19">
+                    <div class="log-title-row">
+                        <span class="log-title">1.2.4 UPDATE</span>
+                        <span class="log-date">8/19/2026</span>
+                    </div>
+                    <div class="log-content">
+                        <ul>
+                            <li>Added New Handcuff System</li>
+                            <li>Added New Hud - Money System</li>
+                            <li>Added New Admin System - Staff Only</li>
+                            <li>Added New Escape Path by Medium</li>
+                            <li>Added Data Saving</li>
+                            <li>Revamped Main Menu</li>
+                            <li>Revamped Workshop</li>
+                            <li>Removed All Supermax Script and Working Assets</li>
+                            <li>Fixed Taser Flying Glitch</li>
+                            <li>Fixed Max Doors Having No Collision</li>
+                            <li>Fixed Medium Seats</li>
+                            <li>Fixed Cafe Doors Not Opening</li>
+                            <li>Fix Broken Seats</li>
+                            <li>And many more!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Log 1.2.3 -->
+                <div class="log-card" data-date="2026-08-10">
+                    <div class="log-title-row">
+                        <span class="log-title">1.2.3 UPDATE</span>
+                        <span class="log-date">8/10/2026</span>
+                    </div>
+                    <div class="log-content">
+                        <ul>
+                            <li>Moved Maximum Security.</li>
+                            <li>Moved Minimum Security.</li>
+                            <li>Added Medium Security.</li>
+                            <li>Changed Booking to refresh player.</li>
+                            <li>Added new CERT.</li>
+                            <li>Added new Riot Control.</li>
+                            <li>Added new upstairs.</li>
+                            <li>Added doors on shower block.</li>
+                            <li>Added new anti cheat.</li>
+                            <li>Fixed all Animations for firearms.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Log 1.2.2 -->
+                <div class="log-card" data-date="2026-08-02">
+                    <div class="log-title-row">
+                        <span class="log-title">1.2.2 UPDATE</span>
+                        <span class="log-date">8/02/2026</span>
+                    </div>
+                    <div class="log-content">
+                        <ul>
+                            <li>Added fall map early.</li>
+                            <li>Added new team list</li>
+                            <li>Added door on the shower block.</li>
+                            <li>Added hold down animation for all guns.</li>
+                            <li>Fixed Handcuff breaking [Again].</li>
+                            <li>Fixed floating lights.</li>
+                            <li>Fixed Overscale Roofs clipping.</li>
+                            <li>Fixed Door closing at the wrong schedule.</li>
+                            <li>Fixed Admin System - Staff Only</li>
+                            <li>Fixed broken Glock animation.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Log 1.2.1 -->
+                <div class="log-card" data-date="2026-07-31-2">
+                    <div class="log-title-row">
+                        <span class="log-title">1.2.1 UPDATE</span>
+                        <span class="log-date">7/31/2026</span>
+                    </div>
+                    <div class="log-content">
+                        <ul>
+                            <li>Sheriff Office can now teleport to the prison.</li>
+                            <li>Added a Construction Area by Maximum Security.</li>
+                            <li>Dropped Items now require a prompt to pickup.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CHANGE LOGS & BUG FIXES -->
+                <div class="log-card" data-date="2026-07-31-1">
+                    <div class="log-title-row">
+                        <span class="log-title">CHANGE LOGS & BUG FIXES</span>
+                        <span class="log-date">7/31/2026</span>
+                    </div>
+                    <div class="log-content">
+                        <ul>
+                            <li>Fixed handcuffs not cuffing.</li>
+                            <li>Fixed movement and Cuffing.</li>
+                            <li>Fixed all team barriers. All Inmate, Escapee and sheriff's office can now pass.</li>
+                            <li>Removed from players joining on phone/tablet. Not Ready.</li>
+                            <li>Improved window escape. Faster Escape.</li>
+                            <li>Fixed broken/unanchored parts.</li>
+                            <li>Removed Super Maximum Security. Not up to our standards.</li>
+                            <li>Fixed Visible Prompt Parts. Now Invisible.</li>
+                            <li>Fixed Firearm Sounds. No more hearing gunshots, slide backs on other side of the map.</li>
+                            <li>Improved Alarm. Inmates can't use alarm anymore.</li>
+                            <li>Removed Super Maximum Security From booking.</li>
+                            <li>Removed Super Maximum Security Team.</li>
+                            <li>Fixed Booking System.</li>
+                            <li>Removed Broken Firearms.</li>
+                            <li>Removed Old Basement.</li>
+                            <li>Removed Old Surveillance Room.</li>
+                            <li>Fixed Clipping Avatars.</li>
+                            <li>Banned Abusing Emotes.</li>
+                            <li>Removed Super Maximum Security Spawns.</li>
+                            <li>Banned Non game Gear.</li>
+                            <li>Added Anti Cheat.</li>
+                            <li>Removed Solitary Confinement Team</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Message Notice -->
+            <div class="notice-box">
+                <span class="notice-icon">⚠️</span>
+                <span><strong>( ! )</strong> | All Bug Reports must be made in the discord. Note: Trying to get staff to fix it and not reporting it will result in moderation.</span>
+            </div>
+        </div>
+
+        <!-- COMMUNITY GUIDELINES PAGE -->
+        <div id="guidelines" class="page-section">
+            
+            <!-- DMCA Header Banner -->
+            <div class="dmca-box">
+                <!-- DMCA Badge Image -->
+                <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1540999953642692618/dmca-badge-w250-2x1-04.png?ex=6a8bff8b&is=6a8aae0b&hm=8db48655814a00aa6626fd4e4998e9c55de5692ac23293058369684c6f5577df&" alt="DMCA Badge" style="border-radius: 4px;">
+                <div class="dmca-text">
+                    <strong>(DMCA LOGO)</strong> All assets presiding to the game or assets presiding to North Redstone community is protected by DMCA (Digital Millennium Copyright Act of 1998). Attempting to steal assets or trying to replica a exact asset of NRC will result in a DMCA violation and may result in court proceedings.
+                </div>
+            </div>
+
+            <div class="guidelines-section">
+                <h2>North Redstone Community Game Guidelines</h2>
+                
+                <div class="rule-card"><p><strong>1. Unfair Gameplay.</strong> Any form of unfair gameplay will not be tolerated within the game North Redstone County Jail. Violating this role result in a moderation action</p></div>
+                <div class="rule-card"><p><strong>2. Glitching.</strong> Any form of glitching is strictly prohibited even for good glitching. If a player is caught glitching. or abusing a glitch they could be moderated.</p></div>
+                <div class="rule-card"><p><strong>3. Bug Abuse</strong> Any form of bug abuse will result in immediate. 3-day ban or further moderation action depending on the severity. bug of use is strictly prohibited even to cause chaos.</p></div>
+                <div class="rule-card"><p><strong>4. Respawning to avoid arrest/cuffs</strong> Responding to avoid arrest/cuffs is strictly prohibited at any point of time violating this rule could result in moderation action.</p></div>
+                <div class="rule-card"><p><strong>5. Cheating/Exploits</strong> Anytime playing North Redstone Community. You are not to use exploits/cheats. to gain an unfair advantage as this is strictly prohibited and will result in an immediate permanent ban until appeal.</p></div>
+                <div class="rule-card"><p><strong>6. Chat Spamming/Flooding Radio.</strong> Any form of chat spamming or flooding chats this includes radio or any form of communication will result in a moderation action.</p></div>
+                <div class="rule-card"><p><strong>7. Abuse of Vote Kick.</strong> Any form of abusing vote kick will result in a moderation action. As abusing vote kick is a tool to get rid of rule breakers not abuse it.</p></div>
+                <div class="rule-card"><p><strong>8. Scamming.</strong> Any form of scamming? players of North Redstone County Jail will result in an immediate permanent ban from our game as scamming violates Roblox terms of service and NRC TOS.</p></div>
+                <div class="rule-card"><p><strong>9. Leaving to avoid moderation action.</strong> At any time if a moderator has a problem with you and trying to resolve it. You are not to leave during a moderation team as that will be signs of evading moderation. Any form of that will result in a permanent ban until appeal has been approved.</p></div>
+                <div class="rule-card"><p><strong>10. Duping.</strong> At any time North Redstone County Jail prohibits the use of duping guns. Shivs, Keycards, Etc. anyone that is caught duping will result in a moderation action.</p></div>
+                <div class="rule-card"><p><strong>11. Roblox TOS.</strong> Please follow Roblox terms of service at all times. If caught breaking Rolex POS, you will be banned. from North Redstone County Jail and your account will be reported to Roblox.</p></div>
+                <div class="rule-card"><p><strong>12. North Redstone TOS [Terms of Service]</strong> anytime you're not to violate the terms of service of North Redstone Community or North Redstone County Jail if caught You will face moderation action.</p></div>
+                <div class="rule-card"><p><strong>13. Staff Impersonation.</strong> At any time you were not to impersonate moderators developer or ownership members if caught impersonating you will be banned. Or other moderation may be taken.</p></div>
+                <div class="rule-card"><p><strong>14. Usage of map steelers</strong> At any time you were not to use a map sealer to take the map of North Redstone County Jail as if caught stealing our map you will be banned permanently and a DMCA will be filed.</p></div>
+            </div>
+
+            <div class="guidelines-section">
+                <h2>North Redstone Community Discord Guidelines</h2>
+
+                <div class="rule-card"><p><strong>1. Respect.</strong> At any time should you respect any members of the North Redstone Community , failure to abide by this rule may result in a moderation.</p></div>
+                <div class="rule-card"><p><strong>2. Spamming.</strong> At any time You are not to spam in any channels within North Redstone Community. This includes primary off topic. commands in-game pictures failing to abide by this rule may result in moderation.</p></div>
+                <div class="rule-card"><p><strong>3. Usage of Racial Slurs.</strong> At any point in time you are prohibited from using. racial slurs regardless of race as this is a form of harassment. It will not be tolerated within the community. They failure to abide by this rule. may result in moderation action.</p></div>
+                <div class="rule-card"><p><strong>4. Harassment.</strong> At any point of time you are not to harass other members about their appearance speech impediments or other disabilities. This is strictly prohibited and will result in a moderation.</p></div>
+                <div class="rule-card"><p><strong>5. NSFW.</strong> At any point of time you are not to post. 18+ material content otherwise known as NSFW this is strictly prohibited. And if caught doing it. You will be immediately banned from the community without the chance of appeal.</p></div>
+                <div class="rule-card"><p><strong>6. Alt Accounts/Bypassing Moderation Actions.</strong> At any point of time you were not to use alt accounts to bypass moderation action. The only time you may use an ALT account is if your account was compromised. deleted otherwise, alt accounts are extremely prohibited And could lead to moderation action if found trying to bypass moderation actions.</p></div>
+                <div class="rule-card"><p><strong>7. Ear Rape/Obnoxious sounds.</strong> At any point in time you were not to ear rape any member. inside of a voice call as this is strictly prohibited and a moderator may server mute you with further moderation actions.</p></div>
+                <div class="rule-card"><p><strong>8. Pinging NRC Officials.</strong> At any point in time you are not to Ping North Redstone Community officials at any time the only time you make a official is if there is a rule breaker. And you need an immediate response? otherwise pinging moderators developers or even ownership will result in you possibly being banned softban/kick or muted.</p></div>
+                <div class="rule-card"><p><strong>9. Spam Joining Voice Calls.</strong> At any time, you're not to spam join voice calls over and over again. If caught you may receive a mute or further moderation action.</p></div>
+                <div class="rule-card"><p><strong>10. Wasting Moderation Time.</strong> At any time you are not to waste our moderators time for non-moderation needs are moderators are here to strictly help and protect the community. From rule Breakers if caught abusing our systems you will be banned from the community. And possibly without the chance of appeal.</p></div>
+                <div class="rule-card"><p><strong>11. Self Harm.</strong> At any time self harm is strictly prohibited and will not be tolerated. as we want to make sure the safety of our members and if caught moderation action will happen and the authorities will be contacted.</p></div>
+                <div class="rule-card"><p><strong>12. Discord TOS [Terms Of Service]</strong> Breaking Discord TOS is prohibited within North Redstone Community and will lead to a permanent ban with [NO APPEAL] any account that violate Discord Terms of Service will be reported.</p></div>
+                <div class="rule-card"><p><strong>13. North Redstone TOS [Terms of Service]</strong> Anytime you're not to violate the terms of service of North Redstone Community if caught You will face moderation action.</p></div>
+                <div class="rule-card"><p><strong>14. Encouraging members to break rules.</strong> At any point in time you are not to encourage other members to break rules upon your behalf if caught. You will face moderation action worse than other member.</p></div>
+                <div class="rule-card"><p><strong>15. Attempt to Raid.</strong> Any form of attempting to raid North Redstone Community will result in a permanent Blacklist from our community and Discord turns the service will be notified of your actions.</p></div>
+                <div class="rule-card"><p><strong>16. Staff Impersonation.</strong> At any time you were not to impersonate moderators developer or ownership members if caught impersonating you will be banned. Or other moderation may be taken.</p></div>
+            </div>
+        </div>
+
+        <!-- CREDITS PAGE -->
+        <div id="credits" class="page-section">
+            <h1 style="color: var(--text-white); text-align: center; margin-bottom: 0.5rem;">Community Credits</h1>
+            <p style="color: var(--text-gray); text-align: center;">Meet the team behind North Redstone Community</p>
+
+            <div class="credits-grid">
+                <!-- Truly -->
+                <div class="credit-card">
+                    <div class="avatar-frame">
+                        <img src="https://images-ext-1.discordapp.net/external/V81CxiW3S4PqF9DSl16RpmwRNBgjWw7zfhPiDrWdS5Y/%3Fsize%3D512/https/cdn.discordapp.com/avatars/918297335258304522/f56e64e03c550615c2b5f714d0b1884f.png?format=webp&quality=lossless" alt="Truly Avatar">
+                    </div>
+                    <div class="person-name">Truly</div>
+                    <div class="person-role">Owner</div>
+                    <div class="person-username">@bblego4</div>
+                </div>
+
+                <!-- Devin -->
+                <div class="credit-card">
+                    <div class="avatar-frame">
+                        <img src="https://images-ext-1.discordapp.net/external/0TQYc8EsOWDIp9ZA1a7ZuQskoN1BCIiiwHKJwqqeHmI/%3Fsize%3D512/https/cdn.discordapp.com/avatars/926889740345679903/a_2cb92e0fe61cf965b984eadbd740fab8.gif" alt="Devin Avatar">
+                    </div>
+                    <div class="person-name">Devin</div>
+                    <div class="person-role">Co-Owner</div>
+                    <div class="person-username">@devin_920</div>
+                </div>
+
+                <!-- Zeph -->
+                <div class="credit-card">
+                    <div class="avatar-frame">
+                        <img src="https://cdn.discordapp.com/attachments/1482464929654247634/1540997567331041290/image.png?ex=6a8bfd52&is=6a8aabd2&hm=cc80d8041beecdb3daee7a2abd55c91966e1e5ceeda3c112c4c1f473d4241af5&" alt="Zeph Avatar">
+                    </div>
+                    <div class="person-name">Zeph</div>
+                    <div class="person-role">Assistant Owner</div>
+                    <div class="person-username">@itszeph</div>
+                </div>
+
+                <!-- Jack -->
+                <div class="credit-card">
+                    <div class="avatar-frame">
+                        <img src="https://media.discordapp.net/attachments/1482464929654247634/1540998201447026758/image.png?ex=6a8bfde9&is=6a8aac69&hm=83fd120e22cae673770ca0eb863b7d49a14b9cedd41f137b42dd7c311b95a8e6&=&format=webp&quality=lossless&width=384&height=378" alt="Jack Avatar">
+                    </div>
+                    <div class="person-name">Jack</div>
+                    <div class="person-role">Community Manager</div>
+                    <div class="person-username">@itskingjackson</div>
+                </div>
+
+                <!-- llucasxx -->
+                <div class="credit-card">
+                    <div class="avatar-frame">
+                        <img src="https://images-ext-1.discordapp.net/external/68Ic8rBRx2xRTgsxULhMGH4db9RrPVs2Htb6aQDcBss/%3Fsize%3D512/https/cdn.discordapp.com/avatars/1422066925588058112/a_61e85a1844702cda4cc297ccdf6b8612.gif" alt="llucasxx Avatar">
+                    </div>
+                    <div class="person-name">llucasxx</div>
+                    <div class="person-role">Website Manager/Moderator</div>
+                    <div class="person-username">@llucasxxx</div>
+                </div>
+            </div>
+
+            <div class="credits-note">
+                " All members named in the credits have that contributed to this community since the start. North Redstone appreciates all of their moderators and contributors that supported the community from the start that are not named in credits."
+            </div>
+        </div>
+
+    </div>
+
+    <!-- APPLICATION LOADING OVERLAY -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Coming Soon! - Waiting for bblego4 for the application questions</div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 North Redstone Community. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showApplicationsLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.style.display = 'flex';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 3000);
+        }
+
+        function filterLogs() {
+            const sortOrder = document.getElementById('sortOrder').value;
+            const container = document.getElementById('logsWrapper');
+            const logs = Array.from(container.children);
+
+            logs.sort((a, b) => {
+                const dateA = a.getAttribute('data-date');
+                const dateB = b.getAttribute('data-date');
+                
+                if (sortOrder === 'newest') {
+                    return dateB.localeCompare(dateA);
+                } else {
+                    return dateA.localeCompare(dateB);
+                }
+            });
+
+            logs.forEach(log => container.appendChild(log));
+        }
+    </script>
+</body>
+</html>
